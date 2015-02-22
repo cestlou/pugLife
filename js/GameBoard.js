@@ -92,7 +92,7 @@ app.factory('GameBoard', [function(){
 			}
 		},
 
-		remove:function(obj){
+		remove: function(obj) {
 			var self=this;
 
 			self.NPCs.forEach(function(item,idx){
@@ -106,10 +106,17 @@ app.factory('GameBoard', [function(){
 
 		},
 
-		doAI:function(){
+		doAI: function() {
 			this.NPCs.forEach(function(npc){
 				npc.do();
 			});
+		},
+		destroy: function(obj) {
+			var self = obj;
+			for (var i = 0; i < self.length; i++) {
+				self.splice(i,1);
+			}
+
 		}
 	};
 }]);

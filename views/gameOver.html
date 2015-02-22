@@ -1,24 +1,18 @@
-<div ng-controller="ModalDemoCtrl">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Im a modal!</h3>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a ng-click="selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
-    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+<div class="modal-header">
+    <h3 class="modal-title">Game Over!</h3>
 </div>
+<div class="modal-body">
+    <p>Your time has ended. Pug again?</p>
+    <p style="italic">below should say "Luna"</p>
+    <br />
+    {{ name }}
+</div>
+<div class="modal-footer">
+    <button ng-click="cancel()" class="btn btn btn-warning"> -CANCEL- </button>
+    <button ng-click="ok()" class="btn btn btn-success"> -WOOF (OK)- </button>
+    <button ng-click="close()" class="btn btn btn-success"> -CLOSE- </button>
+</div>
+
+
+<!-- <span class="glyphicon glyphicon-ok-sign"> good to go
+<span class="glyphicon glyphicon-remove-sign"> cancel -->

@@ -1,43 +1,65 @@
-app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+// app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
-  $scope.items = ['item1', 'item2', 'item3'];
 
-  $scope.open = function (size) {
+//   $scope.open = function (size) {
 
-    var modalInstance = $modal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        items: function () {
-          return $scope.items;
-        }
-      }
-    });
+//     var modalInstance = $modal.open({
+//       templateUrl: 'views/gameOver.html',
+//       controller: 'ModalInstanceCtrl'
+//     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-});
+//     modalInstance.result.then(function (selectedItem) {
+
+//     }, function () {
+//       $log.info('Modal dismissed at: ' + new Date());
+//     });
+//   };
+// });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
+// app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+// 	$scope.ok = function () {
+// 	  $modalInstance.close();
+// 	};
+
+// 	$scope.cancel = function () {
+// 	  $modalInstance.dismiss('cancel');
+// 	};
+// }])
+//////////////////////////////////// end first try /////////////////////////////////////////////
+
+
+///////////////////////////////////////// from Bloggy //////////////////////////////////////////
+app.controller('modalCtrl', ['$scope', '$http', '$modal', '$modalInstance', 'GameBoard', function($scope, $http, $modal, $modalInstance, GameBoard) {
+  $scope.name = "Luna";
+
+  // $scope.open = function() {
+
+    // var postData = {
+    //   title: $scope.title,
+    //   body: $scope.body
+    // }
+
+  //   $http.put('/api/post/' + post.id,postData)
+  //   .success(function(data) {
+  //     AlertService.add('success', 'The Post Has Been Updated');
+  //     $modalInstance.close(data);
+  //   }).error(function(err) {
+  //     alert(err);
+  //   })
+
+
+  // }
+
+  $scope.ok = function() {
+    GameBoard.destroy(this);
+    GameBoard.new(10,10);
+    $modalInstance.close();
   };
 
-  $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
-  };
 
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-});
+
+}]);
