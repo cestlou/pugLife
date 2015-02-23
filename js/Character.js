@@ -1,12 +1,14 @@
 function Character(options) {
 	this.effect = 0;
 	this.score = 0;
+	this.points=0;
 	this.health = 0;
 	this.image = "none.jpg";
 	this.type = 'none';
 	this.behavior = '';
 	this.aiMoveOffset = 1;
 	this.playerMoveCount = 0;
+	this.startTime = Date.now();
 
 
 	this.do = function() {
@@ -90,8 +92,10 @@ function Character(options) {
 
 		if (who.type == 'player') {
 			//do something to who
+			var now = Date.now();
 			who.health += this.effect;
 			who.score += this.score;
+			who.points += Math.ceil(1000 / ((now - who.startTime)/1000));
 
 			return false;
 		} else {

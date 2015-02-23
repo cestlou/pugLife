@@ -2,111 +2,47 @@ var app = angular.module('GameApp', ['ngRoute','ui.bootstrap']);
 
 app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', function($scope, $http, GameBoard, $modal) {
 
-	//////////// Init game ////////////////
+	var gameover, pug, currentLevel;
 
-	// set player starting score (0)
+   	var resetGame = function() {
 
-	var pug = new Character({
-		health: 5,
-		type: 'player',
-		image: '/images/pug.gif'
-	});
+		$scope.$evalAsync(function() {
 
-	///////////////////////////////////////////
+	   		gameover=false;
 
-	/////// setup game level /////////////////
-	var GameBoard = GameBoard;
-	GameBoard.new(10,10);
-	GameBoard.add(pug,0,0);
+			pug = new Character({
+				health: 5,
+				type: 'player',
+				image: '/images/pug.gif'
+			});
+			$scope.pug = pug;
+			$scope.score = pug.score;
+			$scope.points = pug.points;
 
+			currentLevel=1;
+			loadLevel();
+		});
+   	}
 
-	//pre defined board in GameBoard
-	var rainCloud = {
-		effect: -1,
-		type: 'damage',
-		image: '/images/raincloud.png',
-		behavior:'runToward',
-		aiMoveOffset:2
-	}
+   	var loadLevel = function() {
+		var result = GameBoard.load(currentLevel);
+		if(result){
+			pug.score = 0;
+			$scope.gameBoard = result;
+			GameBoard.add(pug,0,0);
+		}else{
+			alert('No more levels. YOU WON!!! ');
+		}
 
-	GameBoard.add(new Character(rainCloud),3,5);
-	GameBoard.add(new Character(rainCloud),1,1);
-	GameBoard.add(new Character(rainCloud),3,9);
-	GameBoard.add(new Character(rainCloud),6,5);
-	GameBoard.add(new Character(rainCloud),3,8);
-	GameBoard.add(new Character(rainCloud),8,8);
-	GameBoard.add(new Character(rainCloud),7,8);
+   	}
 
-	GameBoard.add(new Character(rainCloud),5,3);
-
-
-
-	var food = {
-		effect: 1,
-		type: 'powerUp',
-		image: '/images/bowl.png'
-	};
-	var aFood = GameBoard.add(new Character(food),5,5);
-
-	var cat = {
-		score: 1,
-		type: 'win',
-		image: '/images/cat4.jpg',
-		behavior:'runAway'
-	}
-	// GameBoard.add(new Character(cat),1,4);
-	// GameBoard.add(new Character(cat),2,4);
-	GameBoard.add(new Character(cat),8,4);
-	// GameBoard.add(new Character(cat),4,8);
-	// GameBoard.add(new Character(cat),8,9);
-	// GameBoard.add(new Character(cat),8,6);
-	// GameBoard.add(new Character(cat),9,1);
-	// GameBoard.add(new Character(cat),1,1);
-	// GameBoard.add(new Character(cat),2,1);
-	// GameBoard.add(new Character(cat),2,1);
-	// GameBoard.add(new Character(cat),3,1);
-	// GameBoard.add(new Character(cat),4,1);
-
-   	/////////////////////////////////////////
-
-
-
-   	////// Bind game objects to scope ///////
-
-	$scope.gameBoard = GameBoard.board
-	$scope.pug = pug;
-	$scope.score = pug.score;
-
-   	/////////////////////////////////////////
-
-
-   	/// TESTS remove later ////
-
-	// console.log('pug health',pug.health);
- //   	console.log('pug,pug..return true (no health change)',pug.collide(pug));
-
- //   	console.log('pug health',pug.health);
-
- //   	console.log('food,pug..return false (and health + 1)',aFood.collide(pug));
- //   	console.log('pug,food..return true',pug.collide(aFood));
-
-	// console.log('pug health',pug.health);
-
- //   	console.log('rain,pug..return false (and health - 1)',aRain.collide(pug));
- //   	console.log('pug,rain..return true',pug.collide(aRain));
-
- //   	console.log('pug health',pug.health);
-
- //   	console.log('food,rain..return true (no health change)',aFood.collide(aRain));
- //   	console.log('rain,food..return true',aRain.collide(aFood));
-
- //   	console.log('pug health',pug.health);
-
-	////////////////////////////////////////////
-
+   	resetGame();
 
    	/////////// Listen for user input ///////////////
 	document.addEventListener('keyup',function(e) {
+
+		if(gameover) return;
+
 		console.log('keyup');
 		switch(e.which) {
 			case 37:
@@ -126,35 +62,48 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 
 
 		// check for win / loss
-		if (pug.score >= 5) {
-			// $scope.win = true;
-			console.log('winner');
+		if (pug.score >= GameBoard.win) {
+			//pre modal
+			gameover=true;
 
-			// var modalInstance = $modal.open({
-			//       templateUrl: '/views/gameOver.html',
-			//       controller: 'modalCtrl'
-			// });
-			// return;
+			$modal.open({
+				templateUrl: '/views/gameWin.html',
+				controller: 'modalCtrl',
+				info: function() {
+
+				}
+			}).result.then(function () {
+				//$modalinstance.close()
+
+			});
+
+			currentLevel+=1;
+			loadLevel();
+
+			gameover=false;
+
+			console.log('winner');
+			//post modal
 		} else if (pug.health <= 0) {
-			// $scope.win = false;
+			gameover = true;
 			console.log('loser');
 
 			$modal.open({
-			    templateUrl: '/views/gameOver.html',
+			    templateUrl: '/views/gameLose.html',
 			    controller: 'modalCtrl',
 			    resolve: {
 			      	info: function() {
-			      		$scope.name = "Luna"
+			      		// $scope.level = currentLevel;
 			      	}
 				}
-			})
-			// $modalInstance.close(function() {
+			}).result.then(function () {
+				//$modalinstance.close()
+				resetGame();
+			}, function () {
+			  	resetGame();
+			});
 
-			// });
 		};
-
-
-
 
 		$scope.$apply();
 	});
