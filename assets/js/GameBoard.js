@@ -16,7 +16,7 @@ app.factory('GameBoard', [function() {
 		cat : {
 			score: 1,
 			type: 'win',
-			image: '/images/cat4.jpg',
+			image: '/images/theCat.jpg',
 			behavior:'runAway',
 			aiMoveOffset:2
 		}
@@ -43,7 +43,7 @@ app.factory('GameBoard', [function() {
 
 		add: function(obj,x,y) {
 			if (this.board[x][y]) {
-				alert('theres already someone on this square!');
+				return;
 			} else {
 				if(obj.type === 'player') {
 					this.player = obj;
