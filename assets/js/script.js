@@ -43,7 +43,6 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 
 		if(gameover) return;
 
-		console.log('keyup');
 		switch(e.which) {
 			case 37:
 				pug.move(0,-1);
