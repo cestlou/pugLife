@@ -1,0 +1,15 @@
+.boardRow {
+	clear: both;
+}
+
+.boardCell {
+	display: inline-block;
+	/*background: rgba(0,255,0,0.3);*/
+	margin: 1px 3px;
+	overflow: hidden;
+}
+
+.boardCell img{
+	width: 100%;
+	height: 100%;
+}
