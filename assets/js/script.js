@@ -8,7 +8,7 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 
 		$scope.$evalAsync(function() {
 
-	   		gameover=false;
+	   		gameover = false;
 
 			pug = new Character({
 				health: 5,
@@ -19,7 +19,7 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 			$scope.score = pug.score;
 			$scope.points = pug.points;
 
-			currentLevel=1;
+			currentLevel = 1;
 			loadLevel();
 		});
    	}
@@ -30,8 +30,8 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 			pug.score = 0;
 			$scope.gameBoard = result;
 			GameBoard.add(pug,0,0);
-		}else{
-			alert('No more levels. YOU WON!!! ');
+		} else {
+			alert('No more levels. YOU WON!!!');
 		}
 
    	}
@@ -63,7 +63,7 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 		// check for win / loss
 		if (pug.score >= GameBoard.win) {
 			//pre modal
-			gameover=true;
+			gameover = true;
 
 			$modal.open({
 				templateUrl: '/views/gameWin.html',
@@ -73,13 +73,13 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 				}
 			}).result.then(function () {
 				//$modalinstance.close()
-
+				currentLevel += 1;
+				loadLevel();
+				gameover = false;
 			});
 
-			currentLevel+=1;
-			loadLevel();
 
-			gameover=false;
+
 
 			console.log('winner');
 			//post modal

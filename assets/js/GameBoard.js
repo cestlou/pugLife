@@ -126,7 +126,6 @@ app.factory('GameBoard', [function() {
 				}
 			});
 			self.board[obj.x][obj.y] = false;
-
 		},
 
 		doAI: function() {
@@ -155,6 +154,9 @@ app.factory('GameBoard', [function() {
 					this.add(new Character(items.cat),5,4);
 					this.add(new Character(items.cat),1,4);
 					this.add(new Character(items.cat),2,4);
+					this.add(new Character(items.cat),2,4);
+					this.add(new Character(items.cat),3,4);
+					this.add(new Character(items.cat),6,4);
 
 					this.win=3;
 					break;
