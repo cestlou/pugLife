@@ -26,12 +26,23 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 
    	var loadLevel = function() {
 		var result = GameBoard.load(currentLevel);
-		if(result){
+		if(result) {
 			pug.score = 0;
 			$scope.gameBoard = result;
 			GameBoard.add(pug,0,0);
 		} else {
-			alert('No more levels. YOU WON!!!');
+			gameover = true;
+			$modal.open({
+				templateUrl: '/views/gameOver.html',
+				controller: 'modalCtrl',
+				info: function() {
+
+				}
+			}).result.then(function () {
+				//$modalinstance.close()
+				gameover = false;
+				resetGame();
+			});
 		}
 
    	}
@@ -77,15 +88,9 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
 				loadLevel();
 				gameover = false;
 			});
-
-
-
-
-			console.log('winner');
 			//post modal
 		} else if (pug.health <= 0) {
 			gameover = true;
-			console.log('loser');
 
 			$modal.open({
 			    templateUrl: '/views/gameLose.html',

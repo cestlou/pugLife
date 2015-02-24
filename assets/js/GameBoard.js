@@ -118,9 +118,9 @@ app.factory('GameBoard', [function() {
 		remove: function(obj) {
 			var self = this;
 
-			self.NPCs.forEach(function(item,idx){
-				console.log(item,obj,item==obj);
-				if(item == obj){
+			self.NPCs.forEach(function(item,idx) {
+				console.log(item,obj,item == obj);
+				if(item == obj) {
 					console.log('removed 1');
 					self.NPCs.splice(idx,1);
 				}
@@ -141,22 +141,21 @@ app.factory('GameBoard', [function() {
 					this.new(8,8);
 
 					this.add(new Character(items.rainCloud),3,5);
-					this.add(new Character(items.rainCloud),1,1);
-					this.add(new Character(items.rainCloud),6,5);
+					this.add(new Character(items.rainCloud),7,5);
 					this.add(new Character(items.rainCloud),5,3);
-					this.add(new Character(items.rainCloud),2,3);
+					this.add(new Character(items.rainCloud),3,1);
 					this.add(new Character(items.rainCloud),4,3);
 
 
 					this.add(new Character(items.food),5,5);
+					this.add(new Character(items.food),6,1);
+					this.add(new Character(items.food),1,8);
 
 
-					this.add(new Character(items.cat),5,4);
-					this.add(new Character(items.cat),1,4);
-					this.add(new Character(items.cat),2,4);
-					this.add(new Character(items.cat),2,4);
-					this.add(new Character(items.cat),3,4);
-					this.add(new Character(items.cat),6,4);
+					this.add(new Character(items.cat),2,2);
+					this.add(new Character(items.cat),0,7);
+					this.add(new Character(items.cat),7,1);
+					this.add(new Character(items.cat),6,6);
 
 					this.win=3;
 					break;
@@ -164,22 +163,29 @@ app.factory('GameBoard', [function() {
 					this.new(10,10);
 
 					this.add(new Character(items.rainCloud),3,5);
-					this.add(new Character(items.rainCloud),1,1);
-					this.add(new Character(items.rainCloud),3,9);
+					this.add(new Character(items.rainCloud),0,9);
 					this.add(new Character(items.rainCloud),6,5);
-					this.add(new Character(items.rainCloud),3,8);
+					this.add(new Character(items.rainCloud),2,2);
 					this.add(new Character(items.rainCloud),8,8);
-					this.add(new Character(items.rainCloud),7,8);
+					this.add(new Character(items.rainCloud),5,0);
+					this.add(new Character(items.rainCloud),0,4);
 					this.add(new Character(items.rainCloud),5,3);
 
 
-					this.add(new Character(items.food),5,5);
+					this.add(new Character(items.food),5,2);
+					this.add(new Character(items.food),0,8);
+					this.add(new Character(items.food),8,2);
+					this.add(new Character(items.food),5,10);
 
-					this.add(new Character(items.cat),8,4);
-					this.add(new Character(items.cat),1,4);
-					this.add(new Character(items.cat),2,4);
-					this.add(new Character(items.cat),3,4);
-					this.add(new Character(items.cat),4,4);
+
+
+					this.add(new Character(items.cat),7,2);
+					this.add(new Character(items.cat),5,7);
+					this.add(new Character(items.cat),9,8);
+					this.add(new Character(items.cat),1,8);
+					this.add(new Character(items.cat),8,0);
+
+
 
 					this.win=5
 
