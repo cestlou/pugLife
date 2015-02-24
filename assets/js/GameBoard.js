@@ -11,7 +11,7 @@ app.factory('GameBoard', [function() {
 		food : {
 			effect: 1,
 			type: 'powerUp',
-			image: '/images/bowl.png'
+			image: '/images/dogbowl.png'
 		},
 		cat : {
 			score: 1,
@@ -77,7 +77,6 @@ app.factory('GameBoard', [function() {
 				newY = this.height-1;
 			}
 
-			// console.log('target square',this.board[newX][newY]);
 			if (this.board[newX][newY]) {
 				//me is obj
 				target = this.board[newX][newY]
@@ -89,7 +88,7 @@ app.factory('GameBoard', [function() {
 
 				//if meCanMove == itCanMove then do nothing
 				//true,false,true
-				console.log('moving', meCanMove, itCanMove, meCanMove != itCanMove)
+				// console.log('moving', meCanMove, itCanMove, meCanMove != itCanMove)
 				if (meCanMove != itCanMove) {
 					if (meCanMove) {
 						this.remove(this.board[newX][newY]);
