@@ -148,7 +148,7 @@ app.factory('GameBoard', [function() {
 
 					this.add(new Character(items.food),5,5);
 					this.add(new Character(items.food),6,1);
-					this.add(new Character(items.food),1,8);
+					this.add(new Character(items.food),1,3);
 
 
 					this.add(new Character(items.cat),2,2);
@@ -174,7 +174,7 @@ app.factory('GameBoard', [function() {
 					this.add(new Character(items.food),5,2);
 					this.add(new Character(items.food),0,8);
 					this.add(new Character(items.food),8,2);
-					this.add(new Character(items.food),5,10);
+					this.add(new Character(items.food),5,9);
 
 
 
