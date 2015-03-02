@@ -1,17 +1,15 @@
-<div class="container" ng-controller="GameController">
-    <div class="row">
-        <div char class="col-sm-8">
-            <div ng-repeat="row in gameBoard track by $index" class="boardRow">
-                <div ng-repeat="cell in row track by $index" class="boardCell" ng-style="{width: (100/row.length-1)+'%',height: (100/gameBoard.length-1)+'vh'}">
-                    <img ng-if="cell" ng-src="{{cell.image}}">
-                </div>
+<div class="container gamePage" ng-controller="GameController">
+    <div char class="col-sm-8 gameBoard">
+        <div ng-repeat="row in gameBoard track by $index" class="boardRow" ng-style="{height: (100/gameBoard.length-1)+'%'}">
+            <div ng-repeat="cell in row track by $index" class="boardCell" ng-style="{width: (100/row.length-1)+'%'}">
+                <img ng-if="cell" ng-src="{{cell.image}}">
             </div>
         </div>
-        <div class="col-sm-4">
-            <h3> Pug Health: {{pug.health}} </h3>
-            <h3> Cats: {{pug.score}} / {{pug.gameBoard.win}} </h3>
-            <h3> Pug Score: {{pug.points | number}} </h3>
-            <h4>As a pug, you hate the rain, love cats (to a fault), and food gives you life. Using this logic, you can make some assumptions. Rainclouds decrease your health, cats increase your score, and kibble restores your health. The faster you catch the cats, the more points you get for those catches!</h4>
-        </div>
+    </div>
+    <div class="col-sm-4">
+        <h3> Pug Health: {{pug.health}} </h3>
+        <h3> Cats: {{pug.score}} / {{pug.gameBoard.win}} </h3>
+        <h3> Pug Score: {{pug.points | number}} </h3>
+        <h4>As a pug, you hate the rain, love cats (to a fault), and food gives you life. Using this logic, you can make some assumptions. Rainclouds decrease your health, cats increase your score, and kibble restores your health. The faster you catch the cats, the more points you get for those catches!</h4>
     </div>
 </div>

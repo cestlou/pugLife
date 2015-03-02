@@ -1,0 +1,11 @@
+
+- create button / modal to show highscores list
+-- $http.get('/api/score').success().error()
+
+
+- add beat entire game modal
+
+
+
+- add highscore when player loses or beats game
+-- $http.post('/api/score',{ ... data ... }).success().error()
