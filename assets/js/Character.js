@@ -75,7 +75,7 @@ function Character(options) {
 	}
 
 	this.collide = function(who) {
-		// this is me ... who is who I collided with
+		// this is me ... 'who' is who I collided with
 
 		// if this.type === 'player' return true  (true means CAN move)
 		if (this.type === 'player') {
