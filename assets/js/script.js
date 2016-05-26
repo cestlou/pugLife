@@ -25,25 +25,25 @@ app.controller('GameController', ['$scope', '$http', 'GameBoard', '$modal', func
    	}
 
    	var loadLevel = function() {
-		var result = GameBoard.load(currentLevel);
-		if(result) {
-			pug.score = 0;
-			$scope.gameBoard = result;
-			GameBoard.add(pug,0,0);
-		} else {
-			gameover = true;
-			$modal.open({
-				templateUrl: '/views/gameOver.html',
-				controller: 'modalCtrl',
-				info: function() {
+			var result = GameBoard.load(currentLevel);
+			if(result) {
+				pug.score = 0;
+				$scope.gameBoard = result;
+				GameBoard.add(pug,0,0);
+			} else {
+				gameover = true;
+				$modal.open({
+					templateUrl: '/views/gameOver.html',
+					controller: 'modalCtrl',
+					info: function() {
 
-				}
-			}).result.then(function () {
-				//$modalinstance.close()
-				gameover = false;
-				resetGame();
-			});
-		}
+					}
+				}).result.then(function () {
+					//$modalinstance.close()
+					gameover = false;
+					resetGame();
+				});
+			}
 
    	}
 
